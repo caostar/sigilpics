@@ -159,9 +159,10 @@ return [
         /*
          * Third Party Providers...
          */
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Dingo\Api\Provider\LaravelServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
+        PulkitJalan\Google\GoogleServiceProvider::class,
     ],
 
     /*
@@ -213,6 +214,7 @@ return [
          */
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Google' => PulkitJalan\Google\Facades\Google::class,
     ],
 
 ];
