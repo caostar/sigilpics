@@ -1,4 +1,6 @@
 <?php
+//https://www.sitepoint.com/is-laravel-good-enough-to-power-a-custom-google-drive-ui/
+//https://github.com/laracasts/flash
 namespace App;
 
 class Googl

@@ -49,12 +49,8 @@ class AdminController extends Controller
                 $pageToken = $result->getNextPageToken();
 
             } catch (Exception $e) {
-                return redirect('files')->with('message',
-                    [
-                        'type' => 'error',
-                        'text' => 'Something went wrong while trying to list the files'
-                    ]
-                );
+                flash('Something went wrong while trying to list the files', 'danger');
+                return redirect('files');
               $pageToken = NULL;
             }
         } while ($pageToken);
@@ -100,18 +96,11 @@ class AdminController extends Controller
         try {
             $this->drive->files->delete($id);
         } catch (Exception $e) {
-            return redirect('search')
-                ->with('message', [
-                    'type' => 'error',
-                    'text' => 'Something went wrong while trying to delete the file'
-                ]);
+            flash('Something went wrong while trying to delete the file', 'danger');
+            return redirect('search');
         }
-
-        return redirect('search')
-            ->with('message', [
-                'type' => 'success',
-                'text' => 'File was deleted'
-            ]);
+        flash('File was deleted');
+        return redirect('search');
     }
 
 
@@ -145,19 +134,13 @@ class AdminController extends Controller
 
                 $file_id = $createdFile->getId();
 
-                return redirect('upload')
-                    ->with('message', [
-                        'type' => 'success',
-                        'text' => "File was uploaded with the following ID: {$file_id}"
-                ]);
+                flash('File was uploaded with the following ID: '. $file_id);
+                return redirect('upload');
 
             } catch (Exception $e) {
 
-                return redirect('upload')
-                    ->with('message', [
-                        'type' => 'error',
-                        'text' => 'An error occurred while trying to upload the file'
-                    ]);
+                flash('An error occurred while trying to upload the file', 'danger');
+                return redirect('upload');
 
             }
         }
@@ -168,7 +151,8 @@ class AdminController extends Controller
     public function logout(Request $request)
     {
         $request->session()->flush();
-        return redirect('/')->with('message', ['type' => 'success', 'text' => 'You are now logged out']);
+        flash('You are now logged out');
+        return redirect('/');
     }
 
 }

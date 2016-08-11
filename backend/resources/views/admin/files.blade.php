@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.default-logged')
 
 @section('content')
 <h3>List Files</h3>
