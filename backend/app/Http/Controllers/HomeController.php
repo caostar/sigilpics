@@ -27,13 +27,34 @@ class HomeController extends Controller
             $tokenModel->plataform = 'googledrive';
             $tokenModel->token = json_encode($client->getAccessToken());
             $tokenModel->save();
-            $token = Token::first()->token;
+            $token = Token::first();
 
-        } else if (!Token::first()){
+        } else if (!Token::where('plataform', 'googledrive')->first()){
             $auth_url = $client->createAuthUrl();
             return redirect($auth_url);
         }else{
-            $token = Token::first()->token;
+            $token = Token::where('plataform', 'googledrive')->first();
+            //check if we need to refresh the token
+            $client->setAccessToken($token->token);
+            if ($client->isAccessTokenExpired()) {
+                //print_r("Ok. Token expirado. Vamos renovar.<br/><br/>");
+                $tokenData = $client->getAccessToken();
+                //print_r("<br/><br/>tokenData:<br/>");
+                //print_r($tokenData);
+                $refreshToken = $tokenData['refresh_token'];
+                //print_r("<br/><br/>refreshToken:<br/>");
+                //print_r($refreshToken);
+                $client->refreshToken($refreshToken);
+
+                //print_r("<br/><br/>npvp token:<br/>");
+                $newToken = $client->getAccessToken();
+                $newToken['refresh_token'] = $refreshToken;
+                //print_r($newToken);
+
+                $token->token = json_encode($newToken);
+                $token->save();
+
+            }
         }
         //
         /*$plus = new \Google_Service_Plus($client);
@@ -50,7 +71,7 @@ class HomeController extends Controller
                 /*'email' => $email,
                 'first_name' => $first_name,
                 'last_name' => $last_name,*/
-                'token' => $token
+                'token' => $token->token
             ]
         ]);
 
