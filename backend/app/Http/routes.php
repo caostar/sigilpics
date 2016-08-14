@@ -38,3 +38,22 @@ Route::post('/upload', 'AdminController@doUpload');
 Route::get('/delete/{id}', 'AdminController@delete');
 
 Route::get('/logout', 'AdminController@logout');
+
+/////
+
+
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/tokens',['as' => 'tokens.index', 'uses' => 'TokenController@index']);
+	Route::get('/tokens/create',['as' => 'tokens.create', 'uses' => 'TokenController@create']);
+	Route::get('/tokens/show/{id}',['as' => 'tokens.show', 'uses' => 'TokenController@show']);
+	Route::get('/tokens/edit/{id}',['as' => 'tokens.edit', 'uses' => 'TokenController@edit']);
+	//
+	Route::post('/tokens/store',['as' => 'tokens.store', 'uses' => 'TokenController@store']);
+
+	Route::delete('/tokens/destroy/{id}',['as' => 'tokens.destroy', 'uses' => 'TokenController@destroy']);
+
+	Route::put('/tokens/update/{id}',['as' => 'tokens.update', 'uses' => 'TokenController@update']);
+});
+
+
+

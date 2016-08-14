@@ -164,6 +164,7 @@ return [
         Barryvdh\Cors\ServiceProvider::class,
         PulkitJalan\Google\GoogleServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Laralib\L5scaffold\GeneratorsServiceProvider::class,
     ],
 
     /*
