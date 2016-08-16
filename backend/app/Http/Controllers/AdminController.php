@@ -20,7 +20,8 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.dashboard');
+        //return view('admin.dashboard');
+        return view('admin.upload');
     }
 
 
@@ -34,10 +35,13 @@ class AdminController extends Controller
         do {
             try {
                 $parameters = [
-                    'q' => "viewedByMeTime >= '$three_months_ago' or modifiedTime >= '$three_months_ago'",
-                    'orderBy' => 'modifiedTime',
+                    //'q' => "viewedByMeTime >= '$three_months_ago' or modifiedTime >= '$three_months_ago'",
+                    'q' => "'0B6pJdh96F60XQU9Qd1lxbV96OXM' in parents",
+                    'orderBy' => 'modifiedTime desc',
                     'fields' => 'nextPageToken, files(id, name, modifiedTime, iconLink, webViewLink, webContentLink)',
                 ];
+
+                $parameters['pageSize'] = 1000;
 
                 if ($pageToken) {
                     $parameters['pageToken'] = $pageToken;
