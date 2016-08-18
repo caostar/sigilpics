@@ -89,7 +89,6 @@ class Googl
             ]
         ]);
 
-        flash('You are now logged in.');
         return 'dashboard';
 
    }

@@ -37,6 +37,8 @@ Route::post('/upload', 'AdminController@doUpload');
 // Allows the user to delete a file
 Route::get('/delete/{id}', 'AdminController@delete');
 
+Route::get('/downloadFile/{id}', 'AdminController@downloadFile');
+
 Route::get('/logout', 'AdminController@logout');
 
 /////

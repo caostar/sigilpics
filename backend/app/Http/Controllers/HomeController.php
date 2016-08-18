@@ -16,6 +16,10 @@ class HomeController extends Controller
 
     public function login(Googl $googl, Request $request)
     {
-        return redirect($googl->authenticateOnDrive($request));
+        $url = $googl->authenticateOnDrive($request);
+        
+        if($url == 'dashboard')flash('You are now logged in.');
+
+        return redirect($url);
    }
 }

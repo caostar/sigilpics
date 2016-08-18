@@ -15,11 +15,14 @@
                 last modified: {{ Date::format($file->modifiedTime) }}
             </div>
             <div class="file-links">
-                <a href="{{ $file->webViewLink }}">view</a>
+                <img src="{{ $file->thumbnailLink }}" alt="{{ $file->originalFilename }}"> 
+                <a href="{{ $file->thumbnailLink }}" target="_blank">view thumb in browser</a>
+                <a href="downloadFile/{{ $file->id }}" target="_blank">view full in browser</a>
+                <a href="{{ $file->webViewLink }}" target="_blank">view inside drive (must be logged)</a>
                 @if(!empty($file->webContentLink))
-                <a href="{{ $file->webContentLink }}">download</a>
+                <a href="{{ $file->webContentLink }}" target="_blank">direct download (must be logged)</a>
                 @endif
-                <a href="delete/{{ $file->id }}">delete</a>
+                <!-- <a href="delete/{{ $file->id }}">delete</a> -->
             </div>
         </div>
     </li>

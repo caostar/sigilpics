@@ -5,13 +5,16 @@ use Illuminate\Http\Request;
 use App\Googl;
 use Carbon\Carbon;
 
+include(app_path().'/Helpers/Debugger.php');
+
 class AdminController extends Controller
 {
     private $client;
     private $drive;
 
-    public function __construct(Googl $googl)
+    public function __construct(Googl $googl, Request $request)
     {
+        if(!session('user.token'))$googl->authenticateOnDrive($request);
         $this->client = $googl->client();
         $this->client->setAccessToken(session('user.token'));
         $this->drive = $googl->drive($this->client);
@@ -28,6 +31,7 @@ class AdminController extends Controller
     public function files()
     {
         $result = [];
+        $files = [];
         $pageToken = NULL;
 
         $three_months_ago = Carbon::now()->subMonths(3)->toRfc3339String();
@@ -36,9 +40,10 @@ class AdminController extends Controller
             try {
                 $parameters = [
                     //'q' => "viewedByMeTime >= '$three_months_ago' or modifiedTime >= '$three_months_ago'",
-                    'q' => "'0B6pJdh96F60XQU9Qd1lxbV96OXM' in parents",
+                    'q' => "'".env('GOOGLE_DRIVE_FOLDER')."' in parents and (mimeType contains 'image/' and trashed = false)",
                     'orderBy' => 'modifiedTime desc',
-                    'fields' => 'nextPageToken, files(id, name, modifiedTime, iconLink, webViewLink, webContentLink)',
+                    'fields' => 'nextPageToken, files(id,contentHints/thumbnail,description,imageMediaMetadata(height,location,rotation,subjectDistance,time,width),lastModifyingUser(displayName,emailAddress,photoLink),modifiedTime,name,originalFilename,properties,size,thumbnailLink,webContentLink,webViewLink,mimeType)',
+
                 ];
 
                 $parameters['pageSize'] = 1000;
@@ -48,7 +53,7 @@ class AdminController extends Controller
                 }
 
                 $result = $this->drive->files->listFiles($parameters);
-                $files = $result->files;
+                $files = array_merge($files, $result->files);
 
                 $pageToken = $result->getNextPageToken();
 
@@ -59,12 +64,37 @@ class AdminController extends Controller
             }
         } while ($pageToken);
 
+        /*foreach($files as $f){
+            if(strpos($f->mimeType,"image") > -1){
+                d($f->id);
+                d($f->thumbnailLink);
+                d($f->webViewLink);
+                d($f->webContentLink);
+                d($f->mimeType);
+                d($f->imageMediaMetadata);
+            }            
+        }
+
+        d($files);
+        die;*/
+
         $page_data = [
             'files' => $files
         ];
 
         return view('admin.files', $page_data);
-   }
+    }
+
+    public function downloadFile($id)
+    {
+        $response = $this->drive->files->get($id, array('alt' => 'media'));
+        $content = $response->getBody();
+        $mimeType = $response->getHeader('Content-Type')[0];
+        header('Content-type: ' . $mimeType);
+
+        echo $content;
+        exit;
+    }
 
 
     public function search(Request $request)
@@ -128,6 +158,7 @@ class AdminController extends Controller
             $drive_file->setName($title);
             $drive_file->setDescription($description);
             $drive_file->setMimeType($mime_type);
+            $drive_file->setParents([env('GOOGLE_DRIVE_FOLDER')]);
 
             try {
                 $createdFile = $this->drive->files->create($drive_file, [
