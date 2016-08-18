@@ -30,6 +30,15 @@ class AdminController extends Controller
 
     public function files()
     {
+        $page_data = [
+            'files' => $this->getFiles()
+        ];
+
+        return view('admin.files', $page_data);
+    }
+
+    public function getFiles()
+    {
         $result = [];
         $files = [];
         $pageToken = NULL;
@@ -78,11 +87,8 @@ class AdminController extends Controller
         d($files);
         die;*/
 
-        $page_data = [
-            'files' => $files
-        ];
+        return $files;
 
-        return view('admin.files', $page_data);
     }
 
     public function downloadFile($id)
