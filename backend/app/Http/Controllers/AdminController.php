@@ -139,7 +139,7 @@ class AdminController extends Controller
             return redirect('search');
         }
         flash('File was deleted');
-        return redirect('search');
+        return redirect('files');
     }
 
 
