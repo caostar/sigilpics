@@ -165,9 +165,11 @@ class AdminController extends Controller
             $drive_file->setMimeType($mime_type);
             $drive_file->setParents([env('GOOGLE_DRIVE_FOLDER')]);
 
+            $fileData = file_get_contents($file->getPathName());
+
             try {
                 $createdFile = $this->drive->files->create($drive_file, [
-                    'data' => $file,
+                    'data' => $fileData,
                     'mimeType' => $mime_type,
                     'uploadType' => 'multipart'
                 ]);
