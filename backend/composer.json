@@ -48,7 +48,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "php artisan optimize",
             "php artisan key:generate",
-            "php artisan jwt:generate"
+            "php artisan jwt:secret"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
