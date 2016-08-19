@@ -22,7 +22,7 @@
                 @if(!empty($file->webContentLink))
                 <a href="{{ $file->webContentLink }}" target="_blank">direct download (must be logged)</a>
                 @endif
-                <!-- <a href="delete/{{ $file->id }}">delete</a> -->
+                <a href="delete/{{ $file->id }}">delete</a>
             </div>
         </div>
     </li>
