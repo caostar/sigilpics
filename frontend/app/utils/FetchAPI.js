@@ -1,4 +1,3 @@
-import { isString, isEmpty } from 'lodash'
 import { Promise } from 'es6-promise'
 import _ from 'lodash'
 import {config} from '../../package.json';

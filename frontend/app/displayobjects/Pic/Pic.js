@@ -10,7 +10,8 @@ import SIGIL from '../../assets/images/sigilWhiteThumb.png';
  */
 export default class Pic extends Sprite {
 
-  constructor() {
+  constructor(json) {
+
     const texture = Texture.fromImage(SIGIL);
 
     super(texture);

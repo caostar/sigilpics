@@ -4,6 +4,7 @@ import Pic from '../Pic/Pic.js';
 import Background from '../Background/Background.js';
 import RendererStore from '../../stores/RendererStore.js';
 import FetchAPI from '../../utils/FetchAPI.js';
+import _ from 'lodash'
 /**
  * Main App Display Object
  *
@@ -21,18 +22,26 @@ export default class App extends ScaledContainer {
     this.fetchPics();
 
     var bg = new Background();
-
     this.addChild(bg);
-
-    this.addBunnies();
 
   }
 
-  addBunnies() {
+  fetchPics () {
+    FetchAPI.go('mosaic')
+      .then(json => {
+          //console.log('parsed json: ', json)
+          this.addPics(json)
+      }).catch(ex => {
+          console.log('parsing failed: ', ex)
+          alert('The system is broken. Sorry!')
+    })
+  }
+
+  addPics(json) {
     const cx = RendererStore.get('stageCenter').x;
     const cy = RendererStore.get('stageCenter').y;
 
-    let group1 = new PicGroup();
+    /*let group1 = new PicGroup();
     let b1 = new Pic();
 
     b1.position.x = cx;
@@ -42,12 +51,16 @@ export default class App extends ScaledContainer {
     group1.position.y = cy + (RendererStore.get('stageHeight')*.25);
 
     this.addChild(b1);
-    this.addChild(group1);
-  }
-  //////
+    this.addChild(group1);*/
 
-  fetchPics () {
-      console.log(FetchAPI.go('mosaic'))
+    _.times(json.length, i => {
+      let pic = new Pic(json[i]);
+      pic.position.x = cx;
+      pic.position.y = cy;
+      this.addChild(pic);
+    })
+
+
   }
 
 
