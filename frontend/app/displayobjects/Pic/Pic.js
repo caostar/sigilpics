@@ -1,17 +1,17 @@
 import { Tween } from 'tween.js';
 import { Sprite, Texture } from 'pixi.js';
-import BUNNY from './bunny.png';
+import SIGIL from '../../assets/images/sigilWhiteThumb.png';
 
 /**
  * A bunny which spins on it's feet when moused over
  *
- * @exports Bunny
+ * @exports Pic
  * @extends Sprite
  */
-export default class Bunny extends Sprite {
+export default class Pic extends Sprite {
 
   constructor() {
-    const texture = Texture.fromImage(BUNNY);
+    const texture = Texture.fromImage(SIGIL);
 
     super(texture);
 

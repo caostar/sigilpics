@@ -4,7 +4,9 @@
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function ($api) {
 
-	$api->get('mosaic', 'App\Api\V1\Controllers\MosaicController@index');
+	$api->group(['middleware' => 'cors'], function ($api) {
+		$api->get('mosaic', 'App\Api\V1\Controllers\MosaicController@index');
+	});
 
 	$api->post('auth/login', 'App\Api\V1\Controllers\AuthController@login');
 
