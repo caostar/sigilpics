@@ -55,8 +55,8 @@ export default class App extends ScaledContainer {
 
     _.times(json.length, i => {
       let pic = new Pic(json[i]);
-      pic.position.x = cx;
-      pic.position.y = cy;
+      pic.position.x = Math.random() *RendererStore.get('stageWidth');
+      pic.position.y = Math.random() *RendererStore.get('stageHeight');
       this.addChild(pic);
     })
 

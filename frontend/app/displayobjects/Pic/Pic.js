@@ -12,7 +12,8 @@ export default class Pic extends Sprite {
 
   constructor(json) {
 
-    const texture = Texture.fromImage(SIGIL);
+    console.log(json);
+    const texture = Texture.fromImage(json.thumbnailLink);
 
     super(texture);
 
