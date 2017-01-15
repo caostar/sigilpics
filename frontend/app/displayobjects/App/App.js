@@ -21,8 +21,8 @@ export default class App extends ScaledContainer {
     this.fetchPics();
     this.loadedPics = 0;
 
-    var bg = new Background();
-    this.addChild(bg);
+    this.bg = new Background();
+    this.addChild(this.bg);
 
   }
 
@@ -71,7 +71,10 @@ export default class App extends ScaledContainer {
 
   addPicLosded() {
     this.loadedPics++;
-    console.log("totalLoaded:" + this.loadedPics);
+    console.log("totalLoadedPics:" + this.loadedPics);
+    if(this.loadedPics >= this.totalPics){
+      this.removeChild(this.bg);
+    }
   }
 
 
