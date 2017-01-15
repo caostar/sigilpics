@@ -8,17 +8,21 @@ import SIGIL from '../../assets/images/sigilWhiteThumb.png';
  * @exports Pic
  * @extends Sprite
  */
+
 export default class Pic extends Sprite {
 
   constructor(json) {
 
+    //console.log(json);
     const texture = Texture.fromImage(json.thumbnailLink);
-
     super(texture);
 
-    this.picData = json;
+    this.texture.baseTexture.on('loaded', this.show.bind(this));
 
-    /*this.tween = new Tween(this);*/
+    this.picData = json;
+    this.initialScale = .1;
+    this.normalScale = .7;
+    this.finallScale = 4;
 
     this.anchor.x = .5;
     this.anchor.y = .5;
@@ -26,20 +30,27 @@ export default class Pic extends Sprite {
     this.pivot.x = .5;
     this.pivot.y = .5;
 
-    this.scale.x = .5;
-    this.scale.y = .5;
+    this.scale.x = this.scale.y = this.initialScale;
 
     this.interactive = true;
-    this.on('mouseover', this.show.bind(this));
-    this.on('mouseout', this.hide.bind(this));
+    this.on('mouseover', this.mouseover.bind(this));
+    this.on('mouseout', this.mouseout.bind(this));
+    this.on('tap', this.click.bind(this));
   }
 
-  show() {
-    TweenLite.to(this.scale, .5, {x: 2, y: 2});
+  show(e) {
+    TweenLite.to(this.scale, .5, {x: this.normalScale, y: this.normalScale});
+    this.parent.addPicLosded();
+  }
+  click(e) {
     console.log(this.picData);
   }
-  hide() {
-    TweenLite.to(this.scale, .5, {x: .5, y: .5});
+  mouseover(e) {
+    TweenLite.to(this.scale, .5, {x: this.finallScale, y: this.finallScale});
+    this.parent.addChild(this);
+  }
+  mouseout(e) {
+    TweenLite.to(this.scale, .5, {x: this.normalScale, y: this.normalScale});
   }
 
 }

@@ -21,6 +21,10 @@ class MosaicController extends Controller
             if(strpos($f->mimeType,"image") > -1){
                 $fileParsed = array(
                     'id' => $f->id,
+                    'downLoadFile' => env('APP_URL')."/downloadFile/".$f->id,
+                    'viewOnDrive' => $f->webViewLink,
+                    'gDriveThumbnailLink' => $f->thumbnailLink,
+                    //'proxyThumbnailLink' => env('APP_URL')."/proxyThumb?url=".$f->thumbnailLink,
                     'thumbnailLink' => $f->thumbnailLink,
                     'originalFilename' => $f->originalFilename,
                     'name' => $f->name,

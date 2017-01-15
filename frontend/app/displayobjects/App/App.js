@@ -1,5 +1,4 @@
 import ScaledContainer from '../ScaledContainer/ScaledContainer.js';
-import PicGroup from '../PicGroup/PicGroup.js';
 import Pic from '../Pic/Pic.js';
 import Background from '../Background/Background.js';
 import RendererStore from '../../stores/RendererStore.js';
@@ -20,6 +19,7 @@ export default class App extends ScaledContainer {
     super(...args);
 
     this.fetchPics();
+    this.loadedPics = 0;
 
     var bg = new Background();
     this.addChild(bg);
@@ -53,14 +53,25 @@ export default class App extends ScaledContainer {
     this.addChild(b1);
     this.addChild(group1);*/
 
-    _.times(json.length, i => {
-      let pic = new Pic(json[i]);
+    this.totalPics = json.length;
+    console.log("The app has now "+ this.totalPics + " pictures uploaded.");
+    let added = 0;
+
+    _.times(this.totalPics, i => {
+      added++;
+      let pic = new Pic(json[i], added);
       pic.position.x = Math.random() *RendererStore.get('stageWidth');
       pic.position.y = Math.random() *RendererStore.get('stageHeight');
       this.addChild(pic);
+      
     })
 
 
+  }
+
+  addPicLosded() {
+    this.loadedPics++;
+    console.log("totalLoaded:" + this.loadedPics);
   }
 
 

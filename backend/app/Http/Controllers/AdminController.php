@@ -101,6 +101,33 @@ class AdminController extends Controller
         exit;
     }
 
+     public function proxyThumb()
+    {    
+        /**
+         * Construct the actual image path.
+         */
+        $imgPath = $_GET['url'];
+        
+        /**
+         * Make sure the file is an image if not kill the script
+         */
+        $imgData = getimagesize($imgPath);
+        if(!$imgData) {
+            header('HTTP/1.0 403 Forbidden');
+            die('The file you requested is not an image.');
+        }
+         
+        /**
+         * Set the appropriate content-type and provide the content-length.
+         */
+        header('Content-type: ' . $imgData['mime']);
+         
+        /**
+         * Print the image data
+         */
+        readfile($imgPath);
+    }
+
 
     public function search(Request $request)
     {
