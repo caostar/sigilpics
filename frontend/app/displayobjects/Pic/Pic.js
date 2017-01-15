@@ -26,16 +26,20 @@ export default class Pic extends Sprite {
     this.pivot.x = .5;
     this.pivot.y = .5;
 
+    this.scale.x = .5;
+    this.scale.y = .5;
+
     this.interactive = true;
-    this.on('mouseover', this.startSpin.bind(this));
+    this.on('mouseover', this.show.bind(this));
+    this.on('mouseout', this.hide.bind(this));
   }
 
-  startSpin() {
-    TweenLite.to(this.scale, 1, {x: 2, y: 2});
+  show() {
+    TweenLite.to(this.scale, .5, {x: 2, y: 2});
     console.log(this.picData);
-    /*this.tween.to({rotation: Math.PI*2}, 1000);
-    this.tween.start();
-    this.tween.onComplete(() => this.rotation = 0);*/
+  }
+  hide() {
+    TweenLite.to(this.scale, .5, {x: .5, y: .5});
   }
 
 }
