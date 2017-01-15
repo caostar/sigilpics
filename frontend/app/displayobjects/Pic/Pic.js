@@ -1,4 +1,4 @@
-import { Tween } from 'tween.js';
+import TweenLite from 'gsap';
 import { Sprite, Texture } from 'pixi.js';
 import SIGIL from '../../assets/images/sigilWhiteThumb.png';
 
@@ -12,12 +12,13 @@ export default class Pic extends Sprite {
 
   constructor(json) {
 
-    console.log(json);
     const texture = Texture.fromImage(json.thumbnailLink);
 
     super(texture);
 
-    this.tween = new Tween(this);
+    this.picData = json;
+
+    /*this.tween = new Tween(this);*/
 
     this.anchor.x = .5;
     this.anchor.y = .5;
@@ -30,9 +31,11 @@ export default class Pic extends Sprite {
   }
 
   startSpin() {
-    this.tween.to({rotation: Math.PI*2}, 1000);
+    TweenLite.to(this.scale, 1, {x: 2, y: 2});
+    console.log(this.picData);
+    /*this.tween.to({rotation: Math.PI*2}, 1000);
     this.tween.start();
-    this.tween.onComplete(() => this.rotation = 0);
+    this.tween.onComplete(() => this.rotation = 0);*/
   }
 
 }

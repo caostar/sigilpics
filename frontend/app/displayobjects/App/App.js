@@ -32,8 +32,8 @@ export default class App extends ScaledContainer {
           //console.log('parsed json: ', json)
           this.addPics(json)
       }).catch(ex => {
-          console.log('parsing failed: ', ex)
-          alert('The system is broken. Sorry!')
+          console.log('This shit took place: ', ex)
+          alert('We could not render the pictures. Sorry!')
     })
   }
 
