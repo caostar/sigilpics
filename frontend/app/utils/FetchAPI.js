@@ -12,12 +12,12 @@ class FetchAPI  {
 
       try {
           fetch(url, {
-            method: 'GET'/*,
+            method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Basic mytokengoeshere'
-            }*/
+                'Authorization': 'Basic Z2FtYTpuZWNrZnVjaw=='
+            }
           })
           .then(response => {
             if (response.status >= 200 && response.status < 300) {
