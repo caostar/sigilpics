@@ -14,7 +14,7 @@ export default class Pic extends Sprite {
   constructor(json) {
 
     //console.log(json);
-    let thumbLink = process.env.NODE_ENV == 'production' ? json.thumbnailLink + path : json.proxyThumbnailLink;
+    let thumbLink = DEBUG != true ? json.thumbnailLink : json.proxyThumbnailLink;
     const texture = Texture.fromImage(thumbLink);
     super(texture);
 

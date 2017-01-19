@@ -8,7 +8,7 @@ class FetchAPI  {
   go (path) {
     return new Promise((resolve, reject) => {
 
-      let url = process.env.NODE_ENV == 'production' ? config.apiURL + path : config.apiURLDEV + path;
+      let url = DEBUG != true ? config.apiURL + path : config.apiURLDEV + path;
 
       try {
           fetch(url, {
