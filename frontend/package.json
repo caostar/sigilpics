@@ -21,8 +21,9 @@
     "reactman": "reactman --config ./templates/reactman.config.js"
   },
   "dependencies": {
+    "gsap": "^1.19.0",
     "pixi.js": "^4.3.2",
-    "gsap": "^1.19.0"
+    "screenfull": "^3.0.2"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
