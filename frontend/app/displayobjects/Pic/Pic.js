@@ -44,7 +44,10 @@ export default class Pic extends Sprite {
         .on('tap', this.onDoubleClick.bind(this))
         .on('click', this.onDoubleClick.bind(this))
         .on('mouseover', this.onMouseOver.bind(this))
+        .on('touchstart', this.onMouseOver.bind(this))
         .on('mouseout', this.onMouseOut.bind(this))
+        .on('touchend', this.onMouseOut.bind(this))
+        .on('touchendoutside', this.onMouseOut.bind(this))
         // events for drag start
         .on('mousedown', this.onDragStart.bind(this))
         .on('touchstart', this.onDragStart.bind(this))
