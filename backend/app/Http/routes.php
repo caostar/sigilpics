@@ -39,7 +39,7 @@ Route::get('/delete/{id}', 'AdminController@delete');
 
 Route::get('/downloadFile/{id}', 'AdminController@downloadFile');
 
-//Route::get('/proxyThumb', 'AdminController@proxyThumb');
+Route::get('/proxyThumb', 'AdminController@proxyThumb');
 
 Route::get('/logout', 'AdminController@logout');
 

@@ -3,7 +3,7 @@ import { Sprite, Texture } from 'pixi.js';
 import SIGIL from '../../assets/images/sigilWhiteThumb.png';
 
 /**
- * A bunny which spins on it's feet when moused over
+ * A picture from google drive with clicks and drags
  *
  * @exports Pic
  * @extends Sprite
@@ -14,7 +14,8 @@ export default class Pic extends Sprite {
   constructor(json) {
 
     //console.log(json);
-    const texture = Texture.fromImage(json.thumbnailLink);
+    let thumbLink = process.env.NODE_ENV == 'production' ? json.thumbnailLink + path : json.proxyThumbnailLink;
+    const texture = Texture.fromImage(thumbLink);
     super(texture);
 
     this.texture.baseTexture.on('loaded', this.onTextureLoaded.bind(this));
@@ -36,9 +37,10 @@ export default class Pic extends Sprite {
 
     this
         //mouse events
+        .on('tap', this.click.bind(this))
         .on('mouseover', this.onMouseOver.bind(this))
         .on('mouseout', this.onMouseOut.bind(this))
-        .on('tap', this.onTap.bind(this))
+        
         // events for drag start
         .on('mousedown', this.onDragStart.bind(this))
         .on('touchstart', this.onDragStart.bind(this))
@@ -50,6 +52,10 @@ export default class Pic extends Sprite {
         // events for drag move
         .on('mousemove', this.onDragMove.bind(this))
         .on('touchmove', this.onDragMove.bind(this));
+  }
+
+  click(e) {
+    console.log(this.picData);
   }
 
   onTextureLoaded(event) {
