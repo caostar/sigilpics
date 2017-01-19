@@ -35,12 +35,16 @@ export default class Pic extends Sprite {
     this.interactive = true;
     this.buttonMode = true;
 
+    //double click/tap params
+    this.lastClick = 0,
+    this.space = 350;
+
     this
         //mouse events
-        .on('tap', this.click.bind(this))
+        .on('tap', this.onDoubleClick.bind(this))
+        .on('click', this.onDoubleClick.bind(this))
         .on('mouseover', this.onMouseOver.bind(this))
         .on('mouseout', this.onMouseOut.bind(this))
-        
         // events for drag start
         .on('mousedown', this.onDragStart.bind(this))
         .on('touchstart', this.onDragStart.bind(this))
@@ -54,10 +58,20 @@ export default class Pic extends Sprite {
         .on('touchmove', this.onDragMove.bind(this));
   }
 
-  click(e) {
-    console.log(this.picData);
-  }
+  onDoubleClick(e) {
+    var now = Date.now(),
+    diff = now - this.lastClick;
 
+    if(this.lastClick && (diff < this.space)) {
+        //this was a double click
+        this.lastClick = 0; //reset time
+        console.log(this.picData);
+        window.open(this.picData.downLoadFile);
+    } else {
+        //this was a regular click
+        this.lastClick = now; //update last click time   
+    }
+  }
   onTextureLoaded(event) {
     TweenLite.to(this.scale, .5, {x: this.normalScale, y: this.normalScale});
     this.parent.addPicLosded();
