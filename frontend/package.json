@@ -23,7 +23,8 @@
   "dependencies": {
     "gsap": "^1.19.0",
     "pixi.js": "^4.3.2",
-    "screenfull": "^3.0.2"
+    "screenfull": "^3.0.2",
+    "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.7.2",
