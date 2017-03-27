@@ -13,7 +13,10 @@ npm start - Build and start the app in development mode at http://localhost:8080
 npm run build - Run a production build, outputs to ./build/
 npm run lint - Lint your code
 npm run reactman - Generate code for a DisplayObject or Store
- *
+
+open -a Google\ Chrome --args --disable-web-security --user-data-dir
+
+*
  
  api pics return:
  [

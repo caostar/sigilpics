@@ -9,7 +9,9 @@ class FetchAPI  {
   go (path) {
     return new Promise((resolve, reject) => {
 
-      let url = DEBUG != true ? config.apiURL + path : config.apiURLDEV + path;
+      //let url = DEBUG != true ? config.apiURL + path : config.apiURLDEV + path;
+      let url = config.apiURLDEV + path;
+      //let url = "mosaicSmall.json";
 
       try {
           fetch(url, {
@@ -17,7 +19,7 @@ class FetchAPI  {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': 'Basic Z2FtYTpuZWNrZnVjaw=='
+                //'Authorization': 'Basic Z2FtYTpuZWNrZnVjaw=='
             }
           })
           .then(response => {

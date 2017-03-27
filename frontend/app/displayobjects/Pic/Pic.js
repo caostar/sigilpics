@@ -14,16 +14,22 @@ export default class Pic extends Sprite {
   constructor(json) {
 
     //console.log(json);
-    let thumbLink = DEBUG != true ? json.thumbnailLink : json.proxyThumbnailLink;
+    //let thumbLink = DEBUG != true ? json.thumbnailLink : json.proxyThumbnailLink;
+    let thumbLink = json.thumbnailLink;
+    //let thumbLink = json.downLoadFile;
+    
     const texture = Texture.fromImage(thumbLink);
     super(texture);
 
     this.texture.baseTexture.on('loaded', this.onTextureLoaded.bind(this));
 
+    this.originalX = 0;
+    this.originalY = 0;
+
     this.picData = json;
     this.initialScale = .1;
     this.normalScale = .7;
-    this.finallScale = 3.5;
+    this.finallScale = 3.75;
 
     this.anchor.x = .5;
     this.anchor.y = .5;
