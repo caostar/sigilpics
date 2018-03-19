@@ -10,7 +10,7 @@ class FetchAPI  {
     return new Promise((resolve, reject) => {
 
       //let url = DEBUG != true ? config.apiURL + path : config.apiURLDEV + path;
-      let url = config.apiURLDEV + path;
+      let url = config.apiURL + path;
       //let url = "mosaicSmall.json";
 
       try {
