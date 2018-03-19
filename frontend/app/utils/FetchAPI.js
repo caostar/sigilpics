@@ -1,5 +1,5 @@
 import { Promise } from 'es6-promise'
-import 'whatwg-fetch'
+import 'node-fetch'
 import _ from 'lodash'
 import {config} from '../../package.json';
 

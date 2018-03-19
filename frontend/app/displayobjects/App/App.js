@@ -39,20 +39,10 @@ export default class App extends ScaledContainer {
   }
 
   addPics(json) {
+    this.shuffle(json);
+
     const cx = RendererStore.get('stageCenter').x;
     const cy = RendererStore.get('stageCenter').y;
-
-    /*let group1 = new PicGroup();
-    let b1 = new Pic();
-
-    b1.position.x = cx;
-    b1.position.y = cy;
-
-    group1.position.x = cx;
-    group1.position.y = cy + (RendererStore.get('stageHeight')*.25);
-
-    this.addChild(b1);
-    this.addChild(group1);*/
 
     this.totalPics = json.length;
     this.picsShowed = 0;
@@ -83,7 +73,7 @@ export default class App extends ScaledContainer {
   }
 
   randomShowPicture(){
-    let pic = this.getChildAt(this.picsShowed);
+    let pic = this.picsList[this.picsShowed];
     TweenLite.delayedCall(1, this.showPicture.bind(this), [pic]); 
     this.picsShowed++;
     console.log(this.picsShowed + ' pics showed so far.');
