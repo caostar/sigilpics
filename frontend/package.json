@@ -7,8 +7,8 @@
     "buildDir": "./build",
     "stageWidth": 1920,
     "stageHeight": 1080,
-    "apiURL": "http://caostar.com/private/sigilpics/backend/public/api/",
-    "apiURLDEV": "http://caostar-dev.com/Apps/sigilpics/backend/public/api/"
+    "apiURL": "./backend/public/api/",
+    "apiURLDEV": "./backend/public/api/"
   },
   "scripts": {
     "prestart": "npm install",
