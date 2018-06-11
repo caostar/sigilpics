@@ -1,3 +1,7 @@
+to get in:
+insider
+%%Ish0uldgo!
+
 # sigilpics
 Make a sigil appear worshipping it with daily personal pics
 

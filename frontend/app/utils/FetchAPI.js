@@ -19,7 +19,8 @@ class FetchAPI  {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                //'Authorization': 'Basic Z2FtYTpuZWNrZnVjaw=='
+                'credentials': 'include',
+                'Authorization': 'Basic ' + 'aW5zaWRlcjolJUlzaDB1bGRnbyE='
             }
           })
           .then(response => {
