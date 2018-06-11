@@ -77,6 +77,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'schema' => 'public',
+            'unix_socket'   => '/Applications/MAMP/tmp/mysql/mysql.sock',
         ],
 
     ],
