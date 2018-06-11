@@ -1,15 +1,6 @@
-to get in:
-insider
-%%Ish0uldgo!
-
 # sigilpics
 Make a sigil appear worshipping it with daily personal pics
 
-local:
-http://caostar-dev.com/Apps/sigilpics/backend/public/
-
-remote:
-http://caostar.com/private/sigilpics/backend/public/api/mosaic
 
 /**
 https://github.com/edwinwebb/pixi-seed
